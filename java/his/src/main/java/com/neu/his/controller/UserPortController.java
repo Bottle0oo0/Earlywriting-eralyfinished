@@ -15,14 +15,6 @@ public class UserPortController {
     @Autowired
     private UserPort port;
 
-    @Autowired
-    private UserMapper userMapper;
-
-    @RequestMapping(value = "/user/getUser/{id}",method = RequestMethod.GET)
-    public User getUser(@PathVariable("id") Integer id){
-        User user = userMapper.getUser(id);
-        return user;
-    }
 
     @RequestMapping("/login")
     public User login(@RequestBody LoginUserBean bean) {

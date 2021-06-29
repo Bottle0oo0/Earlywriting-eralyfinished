@@ -30,5 +30,5 @@ public interface UserMapper {
     Integer newUserId();
 
     @Select("select * from user where department_id=#{departmentId}")
-    List<User> userOfDepartment(@Param("departmentId") int departmentId);
+    List<User> userOfDepartment(@Param("departmentId") String departmentId);
 }

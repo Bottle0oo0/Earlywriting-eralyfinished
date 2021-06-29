@@ -3,14 +3,14 @@ package com.neu.his.entity;
 public class RegisterForm {
     private int id;
     private int patientId;
-    private int departmentId;
+    private String departmentId;
     private int doctorId;
     private int level;
     private boolean recordNeeded;
     private double cost;
     private boolean diagnosed;
 
-    public RegisterForm(int id, int patientId, int departmentId, int doctorId, int level, boolean recordNeeded, double cost, boolean diagnosed) {
+    public RegisterForm(int id, int patientId, String departmentId, int doctorId, int level, boolean recordNeeded, double cost, boolean diagnosed) {
         this.id = id;
         this.patientId = patientId;
         this.departmentId = departmentId;
@@ -37,11 +37,11 @@ public class RegisterForm {
         this.patientId = patientId;
     }
 
-    public int getDepartmentId() {
+    public String getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(int departmentId) {
+    public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
     }
 

@@ -11,6 +11,7 @@ import Pay from '@/components/Pay'
 import Refund from '@/components/Refund'
 import DrugTrans from '@/components/DrugTrans'
 import DrugRcv from '@/components/DrugRcv'
+import DepartManage from "../components/DepartManage";
 
 Vue.use(Router)
 
@@ -95,6 +96,14 @@ export default new Router({
           path: 'drug_rcv',
           name: 'DrugRcv',
           component: DrugRcv,
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: 'depart_mag',
+          name: 'departMag',
+          component: DepartManage,
           meta: {
             requireAuth: true
           }

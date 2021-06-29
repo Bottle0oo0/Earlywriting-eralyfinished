@@ -43,7 +43,7 @@ public class RegisterController {
     }
 
     @RequestMapping("/register/doc_depart")
-    public List<User> getDoctors(@RequestBody Map<String, Integer> department) {
+    public List<User> getDoctors(@RequestBody Map<String, String> department) {
         return register.getDoctorsOf(department.get("id"));
     }
 

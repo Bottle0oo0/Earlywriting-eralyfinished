@@ -28,7 +28,7 @@ public interface Register {
 
     List<User> getDoctors();
 
-    List<User> getDoctorsOf(int departmentId);
+    List<User> getDoctorsOf(String departmentId);
 
     void savePatient(Patient patient);
 }

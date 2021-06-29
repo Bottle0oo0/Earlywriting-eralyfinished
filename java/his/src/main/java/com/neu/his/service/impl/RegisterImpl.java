@@ -81,7 +81,7 @@ public class RegisterImpl implements Register {
     }
 
     @Override
-    public List<User> getDoctorsOf(int departmentId) {
+    public List<User> getDoctorsOf(String departmentId) {
         return userMapper.userOfDepartment(departmentId);
     }
 

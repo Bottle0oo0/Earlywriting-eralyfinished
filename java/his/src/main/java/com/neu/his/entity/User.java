@@ -3,10 +3,10 @@ public class User {
     private int id;
     private String psw;
     private String name;
-    private int departmentId;
+    private String departmentId;
     private int type;
 
-    public User(int id, String psw, String name, int departmentId, int type) {
+    public User(int id, String psw, String name, String departmentId, int type) {
         this.id = id;
         this.psw = psw;
         this.name = name;
@@ -38,11 +38,11 @@ public class User {
         this.name = name;
     }
 
-    public int getDepartmentId() {
+    public String getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(int departmentId) {
+    public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
     }
 

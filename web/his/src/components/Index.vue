@@ -41,7 +41,7 @@
             <el-submenu index="6">
               <template slot="title">系统信息</template>
               <el-menu-item index="constant">常数项管理</el-menu-item>
-              <el-menu-item index="department">科室管理</el-menu-item>
+              <el-menu-item index="department" @click="goTo('/index/depart_mag')">科室管理</el-menu-item>
               <el-menu-item index="user">用户管理</el-menu-item>
               <el-menu-item index="disease">疾病信息管理</el-menu-item>
               <el-menu-item index="examination">检验项目管理</el-menu-item>
@@ -77,7 +77,7 @@
             <el-button type="primary" style="margin-top: 50px;" size="small" plain @click="reset()">重置</el-button>
           </div>
           <div class="user-center-bottom">
-            <el-button type="danger" @click="logout()" plain>退出登陆</el-button> 
+            <el-button type="danger" @click="logout()" plain>退出登陆</el-button>
           </div>
         </div>
       </el-drawer>
