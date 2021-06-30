@@ -18,35 +18,24 @@
             <el-submenu index="2">
               <template slot="title">门诊医生</template>
               <el-menu-item index="diagnose" @click="goTo('/index/diagnose')">门诊病历</el-menu-item>
-              <el-menu-item index="exam_req">检验申请</el-menu-item>
               <el-menu-item index="make_presc" @click="goTo('/index/make_presc')">开立处方</el-menu-item>
             </el-submenu>
             <el-submenu index="3">
-              <template slot="title">检验处置</template>
-              <el-menu-item index="do_exam">患者检验</el-menu-item>
-              <el-menu-item index="exam_man">项目管理</el-menu-item>
-            </el-submenu>
-            <el-submenu index="4">
               <template slot="title">药房管理</template>
               <el-menu-item index="drug_trans" @click="goTo('/index/drug_trans')">药房发药</el-menu-item>
               <el-menu-item index="drug_rcv" @click="goTo('/index/drug_rcv')">药房退药</el-menu-item>
-              <el-menu-item index="drug_man">药品管理</el-menu-item>
+              <el-menu-item index="drug_man " @click="goTo('/index/medicine_mag')">药品管理</el-menu-item>
             </el-submenu>
-            <el-submenu index="5">
+            <el-submenu index="4">
               <template slot="title">财务管理</template>
               <el-menu-item index="pay" @click="goTo('/index/pay')">缴费事务</el-menu-item>
               <el-menu-item index="refund" @click="goTo('/index/refund')">退费事务</el-menu-item>
-              <el-menu-item index="finance">财务统计</el-menu-item>
             </el-submenu>
-            <el-submenu index="6">
+            <el-submenu index="5">
               <template slot="title">系统信息</template>
               <el-menu-item index="constant">常数项管理</el-menu-item>
               <el-menu-item index="department" @click="goTo('/index/depart_mag')">科室管理</el-menu-item>
-              <el-menu-item index="user">用户管理</el-menu-item>
               <el-menu-item index="disease">疾病信息管理</el-menu-item>
-              <el-menu-item index="examination">检验项目管理</el-menu-item>
-              <el-menu-item index="drug">药品管理</el-menu-item>
-              <el-menu-item index="arrange">医师排班管理</el-menu-item>
             </el-submenu>
           </el-menu>
         </el-aside>

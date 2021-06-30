@@ -7,13 +7,14 @@ import java.util.List;
 
 public interface ManagePort {
 
-    Department addDepartment(Department department);
+    int addDepartment(Department department);
 
     Department updateDepartment(Department department);
 
-    void deleteDepartment(String departmentId);
+    void deleteDepartment(int departmentId);
 
     List<Department> getDepartments();
 
     List<Department> searchDepartment(String key);
+
 }

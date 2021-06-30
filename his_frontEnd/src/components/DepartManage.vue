@@ -8,7 +8,7 @@
       <el-dialog title="新增科室" @close='clear()' width="30%" :visible.sync="dialogFormVisible" >
         <el-form :model="department">
           <el-form-item label="科室编号" :label-width="formLabelWidth">
-            <el-input v-model="department.id" autocomplete="off"></el-input>
+            <el-input v-model="department.code" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="科室名称" :label-width="formLabelWidth">
             <el-input v-model="department.name" autocomplete="off"></el-input>
@@ -28,10 +28,10 @@
     </div>
 
     <div>
-      <el-table :data="departments" id="department_table" height="350px" style="margin-left: 30px; margin-right: 30px; width: 90%;" @selection-change="handleSelection">
+      <el-table :data="departments" id="department_table" height="600px" style="margin-left: 30px; margin-right: 30px; width: 90%;" @selection-change="handleSelection">
         <el-table-column type="selection" :selectable="checkSelectable"></el-table-column>
         <el-table-column type="index"></el-table-column>
-        <el-table-column label="科室编号" prop="id"></el-table-column>
+        <el-table-column label="科室编号" prop="code"></el-table-column>
         <el-table-column label="科室名称" prop="name"></el-table-column>
         <el-table-column label="科室分类" prop="category"></el-table-column>
         <el-table-column label="科室类型" prop="type"></el-table-column>
@@ -46,7 +46,7 @@
       <el-dialog title="修改科室" @close='clear()' width="30%" :visible.sync="editDialogFormVisible" >
         <el-form :model="department">
           <el-form-item label="科室编号" :label-width="formLabelWidth" >
-            <el-input v-model="department.id" autocomplete="off" :disabled="true"></el-input>
+            <el-input v-model="department.code" autocomplete="off" :disabled="true"></el-input>
           </el-form-item>
           <el-form-item label="科室名称" :label-width="formLabelWidth">
             <el-input v-model="department.name" autocomplete="off"></el-input>
@@ -78,11 +78,13 @@ export default {
       departments:[],
       department: {
         id: null,
+        code: null,
         name: null,
         category: null,
         type: null
       },
       dialogFormVisible: false,
+      editDialogFormVisible : false,
       formLabelWidth: '120px',
       searchContent : null,
       key : null
@@ -93,6 +95,7 @@ export default {
       if(this.searchContent == null) {
         axios.post("/register/init_depart").then((res) => {
           this.departments = res.data
+          console.log(res.data)
         })
 
       }else{
@@ -103,7 +106,7 @@ export default {
 
     },
     clear(){
-      this.department.id=null
+      this.department.code=null
       this.department.name=null
       this.department.category=null
       this.department.type=null
@@ -135,6 +138,7 @@ export default {
     },
     handleEdit(index, row){
       this.department.id = row.id
+      this.department.code = row.code
       this.department.name = row.name
       this.department.type = row.type
       this.department.category = row.category

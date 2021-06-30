@@ -1,25 +1,27 @@
 package com.neu.his.entity;
 
 public class Department {
-    private String id;
+    private int id;
+    private String code;
     private String name;
     private String category;
     private String type;
 
-    public Department(String id, String name, String category, String type) {
+    public Department(int id, String name, String code, String category, String type) {
         this.id = id;
         this.name = name;
+        this.code = code;
         this.category = category;
         this.type = type;
     }
 
-    public Department(String id, String name) {
+    public Department(int id, String name) {
         this.id = id;
         this.name = name;
     }
     public Department(){}
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -31,7 +33,7 @@ public class Department {
         this.name = name;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,5 +51,13 @@ public class Department {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

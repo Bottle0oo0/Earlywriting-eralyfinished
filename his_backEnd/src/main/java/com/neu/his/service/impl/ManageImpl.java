@@ -13,9 +13,8 @@ public class ManageImpl implements ManagePort {
     @Autowired
     private DepartmentMapper departmentMapper;
     @Override
-    public Department addDepartment(Department department) {
-        departmentMapper.addDepartment(department);
-        return department;
+    public int addDepartment(Department department) {
+        return departmentMapper.addDepartment(department);
     }
 
     @Override
@@ -25,13 +24,13 @@ public class ManageImpl implements ManagePort {
     }
 
     @Override
-    public void deleteDepartment(String departmentId) {
+    public void deleteDepartment(int departmentId) {
         departmentMapper.delDepartment(departmentId);
     }
 
     @Override
     public List<Department> getDepartments() {
-        return null;
+        return departmentMapper.getAll();
     }
 
     @Override

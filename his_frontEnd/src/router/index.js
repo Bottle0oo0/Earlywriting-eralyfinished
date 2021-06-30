@@ -12,6 +12,7 @@ import Refund from '@/components/Refund'
 import DrugTrans from '@/components/DrugTrans'
 import DrugRcv from '@/components/DrugRcv'
 import DepartManage from "../components/DepartManage";
+import MedicineManage from "../components/MedicineManage";
 
 Vue.use(Router)
 
@@ -104,6 +105,14 @@ export default new Router({
           path: 'depart_mag',
           name: 'departMag',
           component: DepartManage,
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: 'medicine_mag',
+          name: 'medicineMag',
+          component: MedicineManage,
           meta: {
             requireAuth: true
           }

@@ -118,7 +118,7 @@ public class InquiryImpl implements Inquiry {
             int drugId = Integer.parseInt(item.nextToken());
             String name = item.nextToken();
             int num = Integer.parseInt(item.nextToken());
-            double cost = drugMapper.getDrug(drugId).getCost() * num;
+            double cost = drugMapper.getDrug(drugId).getPrice() * num;
             finAffairMapper.addEntry(new InvoiceEntry(order, id, drugId, num, cost, false, false));
             order++;
         }
