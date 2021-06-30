@@ -35,12 +35,13 @@
       <div style="width: 80%; height: 40%; margin-left: 30px; margin-right: 30px; margin-top: 30px; margin-bottom: 30px;
       ">
         <span style="font-size: 18px; color: gray;">用户名</span><br>
-        <el-input v-model="id" type="text"></el-input><br><br>
+        <el-input v-model="id" type="text" placeholder="请输入用户名" maxlength="10"></el-input><br><br>
         <span style="font-size: 18px; color: gray;">用户密码</span><br>
-        <el-input v-model="psw" type="password"></el-input><br>
+        <el-input v-model="psw" type="password" placeholder="请输入用户密码" maxlength="20"></el-input><br>
+        <span v-if="psw!=null && psw.length<3" style="font-size: 10px; color: red;">密码最少3位</span><br>
       </div>
       <div style="width: 156px; height: 40px; position: relative; left: 25%;">
-        <el-button type="primary" @click="login()">登陆</el-button>
+        <el-button  type="primary" @click="login()">登陆</el-button>
         <el-button type="primary" @click="goToSignUp()" plain>注册</el-button>
       </div>
     </div>
