@@ -1,12 +1,14 @@
 <template>
   <div>
     <div>
-      <el-input class="control-xl" v-model="patient.id" placeholder="身份证号"></el-input>
-      <el-button @click="searchPatientById(patient.id)" icon="el-icon-search" circle></el-button>
+      <el-input class="control-xl" v-model="patient.id" placeholder="身份证号" min="18" max="18"></el-input>
+      <el-button v-if="patient.id==null || patient.id.length==18" @click="searchPatientById(patient.id)" icon="el-icon-search" circle></el-button>
+      <span v-if="patient.id!=null && patient.id.length!=18" style="font-size: 10px; color: red;">请输入正确格式</span>
       <span style="position: absolute; right: 600px; top: 137px">发票号：</span>
       <el-input class="control-l" style="position: absolute; right: 390px" v-model="registerForm.id"></el-input>
       <span style="position: absolute; right: 260px; top: 137px">病历号：</span>
       <el-input class="control-l" style="position: absolute; right: 50px" v-model="patient.recordId"></el-input><br>
+  
     </div>
     <h3 style="color: gray;">挂号信息</h3><br>
     <div>
@@ -125,9 +127,9 @@ export default {
       })
     },
     register() {
-      if (this.registerForm.id == null || this.registerForm.departmentId == null || this.registerForm.doctorId == null || 
-      this.registerForm.level == null || this.registerForm.recordNeeded == null || this.costAll == null || 
-      this.patient.name == null || this.patient.gender == null || this.patient.birth == null || this.patient.age == null || 
+      if (this.registerForm.id == null || this.registerForm.departmentId == null || this.registerForm.doctorId == null ||
+      this.registerForm.level == null || this.registerForm.recordNeeded == null || this.costAll == null ||
+      this.patient.name == null || this.patient.gender == null || this.patient.birth == null || this.patient.age == null ||
       this.patient.id == null || this.patient.recordId == null) {
         this.$message("请将信息填写完整")
       } else {
@@ -145,7 +147,7 @@ export default {
       axios.post("/register/init_ricid").then((res)=>{
         this.patient.recordId = res.data
       })
-      axios.post("/register/init_depart").then((res)=>{
+      axios.post("/register/init_depart"). then((res)=>{
         this.departments = res.data
       })
       this.doctors = []

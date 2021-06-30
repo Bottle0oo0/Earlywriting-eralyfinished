@@ -31,13 +31,14 @@
       </div>
       <div style="width: 80%; height: 40%; margin-left: 30px; margin-right: 30px; margin-bottom: 30px;">
         <span style="color: gray; font-size: 14px;">用户名</span><br>
-        <el-input v-model="user.id" size="small"></el-input>
+        <el-input v-model="user.id" size="small" placeholder="请输入用户名"></el-input>
         <span style="color: gray; font-size: 14px;">真实姓名</span><br>
-        <el-input v-model="user.name" size="small"></el-input>
+        <el-input v-model="user.name" size="small" placeholder="请输入真实姓名"></el-input>
         <span style="color: gray; font-size: 14px;">密码</span><br>
-        <el-input v-model="user.psw" size="small" type="password"></el-input>
+        <el-input v-model="user.psw" size="small" type="password" show-password maxlength="20" placeholder="密码最高20位"></el-input>
+        <span v-if="user.psw!=null && user.psw.length<10" style="font-size: 10px; color: red;">密码最少10位</span><br>
         <span style="color: gray; font-size: 14px;">重复密码</span><br>
-        <el-input v-model="pswCheck" size="small" type="password"></el-input><br><br>
+        <el-input v-model="pswCheck" size="small" type="password" show-password maxlength="20" placeholder="密码最高20位"></el-input><br><br>
         <span style="color: gray; font-size: 14px;">用户类型</span>
         <el-select v-model="user.type" size="small">
           <el-option v-for="t in types" :key="t.value" :label="t.label" :value="t.value"></el-option>
@@ -102,7 +103,7 @@ export default {
     signUp() {
       if (this.user.psw != this.pswCheck) {
         this.$message("两次输入密码不一致")
-      } else if (this.user.id == null || this.user.name == null || this.user.psw == null || 
+      } else if (this.user.id == null || this.user.name == null || this.user.psw == null ||
       this.user.type == null || this.user.departmentId == null) {
         this.$message("请将信息填写完整")
       } else {
