@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%; height: 100%; background-color: #4682B4; position: absolute; top: 0px; left: 0px;">
+  <div style="width: 100%; height: 100%; background-color: #5198d1; position: absolute; top: 0px; left: 0px;">
     <div style="margin-top: 40px; text-align: center;">
       <span style="color: white; font-size: 35px; font-weight: bold;">医院信息管理系统</span><br>
       <span style="color: white; font-size: 28px;">Hospital Information System</span>

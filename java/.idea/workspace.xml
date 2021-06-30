@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ed5d11c-3a4d-4b5d-9717-442b4f2e8761" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../web/his/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../web/his/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web/his/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../web/his/src/components/Login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,13 +42,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -80,6 +83,7 @@
       <workItem from="1624953312969" duration="596000" />
       <workItem from="1624958147544" duration="85000" />
       <workItem from="1624958244251" duration="668000" />
+      <workItem from="1625013124316" duration="3868000" />
     </task>
     <servers />
   </component>
