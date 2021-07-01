@@ -5,35 +5,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: null,
-    isLogin:false,
-    token:""
-  },
-  getters:{
-    currentUser(state){
-      return state.user
-    },
-    isLogin(state){
-      return state.isLogin
-    }
+    user: null
   },
   mutations: {
     login(state, user) {
-        state.user=user
-        state.isLogin=true
+      state.user = user
     },
     logout(state) {
-      sessionStorage.setItem("userName",null);
-      sessionStorage.setItem("userToken","");
-      state.user=null
-      state.isLogin=false
-      state.token=""
+      state.user = null
     }
   },
   actions: {
 
   },
   modules: {
-
+    
   }
 })
