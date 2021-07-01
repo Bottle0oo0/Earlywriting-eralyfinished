@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 100% ;margin:0px; padding: 0px">
     <div>
       <el-input class="control-xl" v-model="patient.id" placeholder="身份证号" min="18" max="18"></el-input>
       <el-button v-if="patient.id==null || patient.id.length==18" @click="searchPatientById(patient.id)" icon="el-icon-search" circle></el-button>
@@ -8,10 +8,9 @@
       <el-input class="control-l" style="position: absolute; right: 390px" v-model="registerForm.id"></el-input>
       <span style="position: absolute; right: 260px; top: 137px">病历号：</span>
       <el-input class="control-l" style="position: absolute; right: 50px" v-model="patient.recordId"></el-input><br>
-  
     </div>
     <h3 style="color: gray;">挂号信息</h3><br>
-    <div>
+    <div id="content">
       <!-- 第一行 -->
       <span>患者姓名：</span>
       <el-input class="control" v-model="patient.name"></el-input>
@@ -193,5 +192,10 @@ export default {
 span {
   color: gray;
   font-size: 14px;
+}
+#content{
+  position: relative;
+  top:0px;
+  bottom: 100px;
 }
 </style>
