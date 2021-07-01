@@ -18,7 +18,9 @@ public interface Register {
 
     int newRecordId();
 
-    Patient getPatientForReg(int id);
+    int newPatientId();
+
+    Patient searchPatient(String id) ;
 
     PatientBean getPatientForWith(int id);
 

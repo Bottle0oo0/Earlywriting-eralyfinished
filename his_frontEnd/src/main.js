@@ -13,6 +13,7 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 var axios = require('axios')
 axios.defaults.baseURL = 'http://localhost:8001'
+// axios.defaults.baseURL = 'http://81.68.80.166:8001'
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {

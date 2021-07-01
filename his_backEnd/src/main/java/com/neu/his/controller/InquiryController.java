@@ -21,6 +21,7 @@ public class InquiryController {
     // 看诊业务
     @RequestMapping("/diagnose/init_undia")
     public List<RegPatientBean> getUndiagnosedList(@RequestBody Map<String, Integer> doctor) {
+        System.out.println(doctor.get("id"));
         return inquiry.getPatientList(doctor.get("id"), false);
     }
 

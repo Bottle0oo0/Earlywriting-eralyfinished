@@ -50,10 +50,16 @@ public class RegisterImpl implements Register {
         if (id == null) return 1;
         else return id;
     }
+    @Override
+    public int newPatientId() {
+        Integer id = patientMapper.newPatientId();
+        if (id == null) return 1;
+        else return id;
+    }
 
     @Override
-    public Patient getPatientForReg(int id) {
-        return patientMapper.getPatient(id);
+    public Patient searchPatient(String id) {
+        return patientMapper.searchPatient(id);
     }
 
     @Override
@@ -87,8 +93,9 @@ public class RegisterImpl implements Register {
 
     @Override
     public void savePatient(Patient patient) {
-        if (patientMapper.getPatient(patient.getId()) == null) {
-            patientMapper.addPatient(patient);
-        } else patientMapper.updatePatient(patient);
+        patientMapper.addPatient(patient);
+//        if (patientMapper.getPatient(patient.getId()) == null) {
+//            patientMapper.addPatient(patient);
+//        } else patientMapper.updatePatient(patient);
     }
 }

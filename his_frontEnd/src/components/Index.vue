@@ -12,7 +12,7 @@
           <el-menu default-active="1" unique-opened=true>
             <el-submenu index="1">
               <template slot="title">挂号收费</template>
-              <el-menu-item index="rbegister" @click="goTo('/index/register')">挂号</el-menu-item>
+              <el-menu-item index="register" @click="goTo('/index/register')">挂号</el-menu-item>
               <el-menu-item index="withdraw" @click="goTo('/index/withdraw')">退号</el-menu-item>
             </el-submenu>
             <el-submenu index="2">

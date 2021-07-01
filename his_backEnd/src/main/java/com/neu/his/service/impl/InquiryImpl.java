@@ -36,6 +36,7 @@ public class InquiryImpl implements Inquiry {
     @Override
     public List<RegPatientBean> getPatientList(int doctorId, boolean diagnosed) {
         List<RegisterForm> registerFormList = registerMapper.getRegisterFormOf(doctorId, diagnosed);
+
         List<RegPatientBean> beanList = new ArrayList<>();
         for (RegisterForm registerForm : registerFormList) {
             Patient patient = patientMapper.getPatient(registerForm.getPatientId());
