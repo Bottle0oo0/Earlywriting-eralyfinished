@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <el-container>
+  <div style="height: 100%">
+    <el-container style="height: 100%;">
       <el-header height="100px" style="background-color: #409EFF; line-height: 100px;">
         <span style="font-size: 40px; color: white;">NeuSoft HIS</span>&nbsp;&nbsp;&nbsp;&nbsp;
 <!--        <span style="font-size: 20px; color: white;">version 1.0.1</span> -->
         <span class="hello-text" style="font-size: 20px; color: white;">Hello, {{user.name}}</span>
         <el-button @click="drawer = true" class="user-center-btn" type="primary" icon="el-icon-more" circle></el-button>
       </el-header>
-      <el-container>
+      <el-container style="height: 100%;">
         <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-          <el-menu default-active="1" unique-opened=true>
+          <el-menu default-active="3" unique-opened=true>
             <el-submenu index="1">
               <template slot="title">挂号收费</template>
               <el-menu-item index="rbegister" @click="goTo('/index/register')">挂号</el-menu-item>
