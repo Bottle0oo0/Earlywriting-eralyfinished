@@ -10,28 +10,28 @@
       <el-container style="height: 100%;">
         <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
           <el-menu default-active="3" unique-opened=true>
-            <el-submenu index="1">
+            <el-submenu index="1" v-if="userTemp.type==1">
               <template slot="title">挂号收费</template>
               <el-menu-item index="rbegister" @click="goTo('/index/register')">挂号</el-menu-item>
               <el-menu-item index="withdraw" @click="goTo('/index/withdraw')">退号</el-menu-item>
             </el-submenu>
-            <el-submenu index="2">
+            <el-submenu index="2" v-if="userTemp.type==2">
               <template slot="title">门诊医生</template>
               <el-menu-item index="diagnose" @click="goTo('/index/diagnose')">门诊病历</el-menu-item>
               <el-menu-item index="make_presc" @click="goTo('/index/make_presc')">开立处方</el-menu-item>
             </el-submenu>
-            <el-submenu index="3">
+            <el-submenu index="3" v-if="userTemp.type==3">
               <template slot="title">药房管理</template>
               <el-menu-item index="drug_trans" @click="goTo('/index/drug_trans')">药房发药</el-menu-item>
               <el-menu-item index="drug_rcv" @click="goTo('/index/drug_rcv')">药房退药</el-menu-item>
               <el-menu-item index="drug_man " @click="goTo('/index/medicine_mag')">药品管理</el-menu-item>
             </el-submenu>
-            <el-submenu index="4">
+            <el-submenu index="4" v-if="userTemp.type==4">
               <template slot="title">财务管理</template>
               <el-menu-item index="pay" @click="goTo('/index/pay')">缴费事务</el-menu-item>
               <el-menu-item index="refund" @click="goTo('/index/refund')">退费事务</el-menu-item>
             </el-submenu>
-            <el-submenu index="5">
+            <el-submenu index="5" v-if="userTemp.type==5">
               <template slot="title">系统信息</template>
               <el-menu-item index="constant">常数项管理</el-menu-item>
               <el-menu-item index="department" @click="goTo('/index/depart_mag')">科室管理</el-menu-item>
@@ -105,20 +105,16 @@ export default {
           value: 2
         },
         {
-          label: "检验师",
+          label: "药剂师",
           value: 3
         },
         {
-          label: "药剂师",
+          label: "财务师",
           value: 4
         },
         {
-          label: "财务师",
-          value: 5
-        },
-        {
           label: "行政管理员",
-          value: 6
+          value: 5
         }
       ],
       departments: []
