@@ -4,6 +4,7 @@ import com.neu.his.bean.FinAffairBean;
 import com.neu.his.bean.InvoiceEntryBean;
 import com.neu.his.bean.PatientBean;
 import com.neu.his.entity.InvoiceEntry;
+import com.neu.his.entity.Patient;
 import com.neu.his.mapper.*;
 import com.neu.his.service.FinancialAffair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class FinancialAffairImpl implements FinancialAffair {
     private DrugMapper drugMapper;
 
     @Override
-    public PatientBean getPatient(int id) {
-        return new PatientBean(patientMapper.getPatient(id));
+    public Patient getPatient(int id) {
+        return patientMapper.getPatient(id);
     }
 
     @Override

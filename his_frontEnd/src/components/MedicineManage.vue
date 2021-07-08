@@ -27,8 +27,6 @@
         <el-table-column label="规格" prop="format"></el-table-column>
         <el-table-column label="单位" prop="unit"></el-table-column>
         <el-table-column label="单价" prop="price"></el-table-column>
-        <el-table-column label="剂型" prop="dosage"></el-table-column>
-        <el-table-column label="类型" prop="type"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button type="primary" plain @click="editDialogFormVisible=true">编辑</el-button>

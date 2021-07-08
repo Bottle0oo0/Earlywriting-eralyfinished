@@ -1,8 +1,8 @@
 <template>
   <div>
     <div>
-      <el-input class="control-xl" v-model="patient.id" placeholder="身份证号"></el-input>
-      <el-button type="primary" icon="el-icon-search" plain circle @click="searchAffairs(patient.id)"></el-button><br>
+      <el-input class="control-xl" v-model="patient.idNumber" placeholder="身份证号"></el-input>
+      <el-button type="primary" icon="el-icon-search" plain circle @click="searchAffairs(patient.idNumber)"></el-button><br>
     </div>
     <div class="main">
       <span>姓名：</span>
@@ -16,8 +16,8 @@
       <el-table :data="affairs" height="350px" style="margin-left: 30px; margin-right: 30px; width: 90%;" @selection-change="handleSelection">
         <el-table-column type="selection" :selectable="checkSelectable"></el-table-column>
         <el-table-column type="index"></el-table-column>
-        <el-table-column label="退费项目ID" prop="id"></el-table-column>
-        <el-table-column label="退费项目名" prop="name"></el-table-column>
+        <el-table-column label="退费项目ID" prop="affairId"></el-table-column>
+        <el-table-column label="退费项目名" prop="affairName"></el-table-column>
         <el-table-column label="数量" prop="num"></el-table-column>
         <el-table-column label="总价" prop="cost"></el-table-column>
         <el-table-column label="缴费状态" prop="paid"></el-table-column>
@@ -41,6 +41,7 @@ export default {
     return {
       patient: {
         id: null,
+        idNumber: null,
         name: null,
         gender: null,
         birth: null,
@@ -56,12 +57,16 @@ export default {
   },
   methods: {
     searchAffairs(patientId) {
-      axios.post("/fin/get_patient", {id: patientId}).then((res)=>{
+      axios.post("register/search_patient", {id: patientId}).then((res)=>{
         this.patient = res.data
+        console.log(this.patient)
+        axios.post("/fin/affair", {id: this.patient.id}).then((res)=>{
+          this.affairs = res.data
+        })
+
       })
-      axios.post("/fin/affair", {id: patientId}).then((res)=>{
-        this.affairs = res.data
-      })
+
+
     },
     checkSelectable(row) {
       if (row.paid == "未缴费" || row.state == "已出药") return false;

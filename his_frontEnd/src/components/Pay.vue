@@ -59,9 +59,7 @@ export default {
     searchAffairs(patientId) {
       axios.post("register/search_patient", {id: patientId}).then((res)=>{
         console.log(res.data)
-
         this.patient = res.data
-        console.log(this.patient);
         axios.post("/fin/affair", {id: this.patient.id}).then((res)=>{
           this.affairs = res.data
         })
@@ -69,7 +67,7 @@ export default {
 
     },
     checkSelectable(row) {
-      if (row.paid == "已缴费") return false;
+      if (row.paid === "已缴费") return false;
       else return true;
     },
     handleSelection(val) {

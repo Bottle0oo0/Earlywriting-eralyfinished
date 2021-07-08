@@ -12,9 +12,6 @@ public interface PatientMapper {
     @Select("select * from patient where id=#{id}")
     Patient getPatient(@Param("id") int id);
 
-    @Select("select * from patient where id=#{id}")
-    Patient getPatientID(@Param("id") int id);
-
     @Select("select * from patient where idNumber=#{idNumber}")
     Patient searchPatient(@Param("idNumber") String idNumber);
 

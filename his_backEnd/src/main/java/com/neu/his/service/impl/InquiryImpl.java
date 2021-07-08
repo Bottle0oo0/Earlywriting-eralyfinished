@@ -109,7 +109,7 @@ public class InquiryImpl implements Inquiry {
     @Override
     public Patient getPatientIdNumber(int registerFormId) {
         int id = registerMapper.getRegisterForm(registerFormId).getPatientId();
-        return patientMapper.getPatientID(id);
+        return patientMapper.getPatient(id);
     }
 
     @Override
