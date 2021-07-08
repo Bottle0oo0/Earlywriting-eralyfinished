@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="head">
-      <el-input class="control-l" v-model="registerFormId" placeholder="发票号" style="margin-left: 30px; margin-top: 30px;"></el-input>
+      <el-input class="control-l" v-model="registerFormId" placeholder="病历号" style="margin-left: 30px; margin-top: 30px;"></el-input>
       <el-button type="primary" icon="el-icon-search" plain circle style="margin-right: 80px" @click="searchPatientId(registerFormId)"></el-button>
       <span>身份证号：</span>
-      <el-input class="control-xl" v-model="patientId" style="margin-right: 80px" readonly></el-input>
+      <el-input class="control-xl" v-model="patient.idNumber" style="margin-right: 80px" readonly></el-input>
       <el-button type="primary" @click="makePresc()">开立处方</el-button>
       <el-button type="primary" plain @click="init()">刷新页面</el-button>
       <el-button type="success" plain @click="newModelDrawer = true">新建模版</el-button>
@@ -116,13 +116,27 @@ export default {
         id: null,
         name: null,
         num: null
+      },
+      patient: {
+        name: null,
+        gender: null,
+        birth: null,
+        age: null,
+        id: null,
+        addr: null,
+        idNumber : null,
+        tel: null,
+        recordId: null
       }
     }
   },
   methods: {
     searchPatientId(registerFormId) {
       axios.post("/make_presc/patient_id", {id: registerFormId}).then((res)=>{
-        this.patientId = res.data
+        this.patient = res.data
+      })
+      axios.post("/make_presc/patient_id", {id: registerFormId}).then((res)=>{
+        this.patintIndex = res.data
       })
     },
     handleCurrentChangePresc(val) {
@@ -176,8 +190,8 @@ export default {
       this.drugsAnalysis(this.drugListStr, this.drugList)
     },
     makePresc() {
-      if (this.patientId != null) {
-        axios.post("/make_presc", {id: this.patientId, drugs: this.drugListStr})
+      if (this.patient.id != null) {
+        axios.post("/make_presc", {id: this.patient.id, drugs: this.drugListStr})
         this.$message("处方开立成功")
       } else this.$message("请将信息填写完整")
     },

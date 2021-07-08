@@ -3,14 +3,14 @@
     <div class="table-pane-1">
       <span class="table-title">待诊患者</span><br>
       <el-table :data="undiagnosedList" height="200px" highlight-current-row @current-change="handleCurrentChangePatient">
-        <el-table-column label="发票号" prop="id"></el-table-column>
+        <el-table-column label="病历号" prop="id"></el-table-column>
         <el-table-column label="患者姓名" prop="name"></el-table-column>
       </el-table>
     </div>
     <div class="table-pane-2">
       <span class="table-title">已诊患者</span><br>
       <el-table :data="diagnosedList" height="200px" highlight-current-row @current-change="handleCurrentChangePatient">
-        <el-table-column label="发票号" prop="id"></el-table-column>
+        <el-table-column label="病历号" prop="id"></el-table-column>
         <el-table-column label="患者姓名" prop="name"></el-table-column>
       </el-table>
     </div>

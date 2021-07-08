@@ -82,8 +82,8 @@ public class InquiryController {
     }
 
     @RequestMapping("/make_presc/patient_id")
-    public int getPatientId(@RequestBody Map<String, Integer> registerForm) {
-        return inquiry.getPatientId(registerForm.get("id"));
+    public Patient getPatientId(@RequestBody Map<String, Integer> registerForm) {
+        return inquiry.getPatientIdNumber(registerForm.get("id"));
     }
 
     @RequestMapping("/make_presc")

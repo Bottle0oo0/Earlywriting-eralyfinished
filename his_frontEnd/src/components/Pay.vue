@@ -1,8 +1,8 @@
 <template>
   <div>
     <div>
-      <el-input class="control-xl" v-model="patient.id" placeholder="身份证号"></el-input>
-      <el-button type="primary" icon="el-icon-search" plain circle @click="searchAffairs(patient.id)"></el-button><br>
+      <el-input class="control-xl" v-model="patient.idNumber" placeholder="身份证号"></el-input>
+      <el-button type="primary" icon="el-icon-search" plain circle @click="searchAffairs(patient.idNumber)"></el-button><br>
     </div>
     <div class="main">
       <span>姓名：</span>
@@ -41,6 +41,7 @@ export default {
     return {
       patient: {
         id: null,
+        idNumber: null,
         name: null,
         gender: null,
         birth: null,
@@ -56,12 +57,16 @@ export default {
   },
   methods: {
     searchAffairs(patientId) {
-      axios.post("/fin/get_patient", {id: patientId}).then((res)=>{
+      axios.post("register/search_patient", {id: patientId}).then((res)=>{
+        console.log(res.data)
+
         this.patient = res.data
+        console.log(this.patient);
+        axios.post("/fin/affair", {id: this.patient.id}).then((res)=>{
+          this.affairs = res.data
+        })
       })
-      axios.post("/fin/affair", {id: patientId}).then((res)=>{
-        this.affairs = res.data
-      })
+
     },
     checkSelectable(row) {
       if (row.paid == "已缴费") return false;
