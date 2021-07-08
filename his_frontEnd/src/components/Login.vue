@@ -1,5 +1,11 @@
+
 <template>
-  <div style="width: 100%; height: 100%; background-color: #5198d1; position: absolute; top: 0px; left: 0px;">
+
+<div>
+<!-- <div class="middle" :style="backgroundDiv" > -->
+<!-- <div :style="{'background-image':'url('+img+')'}" > -->
+  <!-- <div style="width: 100%; height: 100%; background-color: #5198d1; position: absolute; top: 0px; left: 0px;"> -->
+  <div class="middle" :style="backgroundDiv" >
     <div style="margin-top: 40px; text-align: center;">
       <span style="color: white; font-size: 35px; font-weight: bold;">医院信息管理系统</span><br>
       <span style="color: white; font-size: 28px;">Hospital Information System</span>
@@ -44,7 +50,10 @@
         <el-button  type="primary" @click="login()">登陆</el-button>
         <el-button type="primary" @click="goToSignUp()" plain>注册</el-button>
       </div>
+</div>
     </div>
+
+
   </div>
 </template>
 
@@ -55,8 +64,13 @@ export default {
   data() {
     return {
       id: null,
-      psw: null
+      psw: null,
+      img:require('@/assets/cover3.jpg'),
+      backgroundDiv: {
+                  backgroundImage: 'url(' + require('@/assets/cover3.jpg') + ')'
+              }
     }
+
   },
   methods: {
     login() {
@@ -88,5 +102,10 @@ export default {
 </script>
 
 <style scoped>
-
+.middle {
+    height: 100%;
+    width: 100%;
+    background: no-repeat center top;
+    background-size: contain;
+}
 </style>

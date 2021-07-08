@@ -1,17 +1,16 @@
 <template>
-  <div>
+  <div style="height: 100% ;margin:0px; padding: 0px">
     <div>
-      <el-input class="control-xl" v-model="patient.idNumber" placeholder="身份证号" min="18" max="18"></el-input>
-      <el-button v-if="patient.idNumber==null || patient.idNumber.length===18" @click="searchPatientById(patient.idNumber)" icon="el-icon-search" circle></el-button>
-      <span v-if="patient.idNumber!=null && patient.idNumber.length!==18" style="font-size: 10px; color: red;">请输入正确格式</span>
+      <el-input class="control-xl" v-model="patient.id" placeholder="身份证号" min="18" max="18"></el-input>
+      <el-button v-if="patient.id==null || patient.id.length==18" @click="searchPatientById(patient.id)" icon="el-icon-search" circle></el-button>
+      <span v-if="patient.id!=null && patient.id.length!=18" style="font-size: 10px; color: red;">请输入正确格式</span>
       <span style="position: absolute; right: 600px; top: 137px">发票号：</span>
       <el-input class="control-l" style="position: absolute; right: 390px" v-model="registerForm.id"></el-input>
       <span style="position: absolute; right: 260px; top: 137px">病历号：</span>
       <el-input class="control-l" style="position: absolute; right: 50px" v-model="patient.recordId"></el-input><br>
-
     </div>
     <h3 style="color: gray;">挂号信息</h3><br>
-    <div>
+    <div id="content">
       <!-- 第一行 -->
       <span>患者姓名：</span>
       <el-input class="control" v-model="patient.name"></el-input>
@@ -25,7 +24,7 @@
       <el-input class="control" v-model="patient.age"></el-input><br>
       <!-- 第二行 -->
       <span>身份证号：</span>
-      <el-input class="control-xl" v-model="patient.idNumber"></el-input>
+      <el-input class="control-xl" v-model="patient.id"></el-input>
       <span>家庭住址（可选）：</span>
       <el-input class="control-xl" style="width: 582px" v-model="patient.addr"></el-input><br>
       <!-- 第三行 -->
@@ -105,7 +104,6 @@ export default {
       },
       patient: {
         name: null,
-        idNumber: null,
         gender: null,
         birth: null,
         age: null,
@@ -117,8 +115,8 @@ export default {
     }
   },
   methods: {
-    searchPatientById(patientId) {
-      axios.post("/register/search_patient", {id: patientId}).then((res)=>{
+    searchPatientById(patient) {
+      axios.post("/register/search_patient", {id: patient}).then((res)=>{
         if (res.data) this.patient = res.data
       })
     },
@@ -131,7 +129,7 @@ export default {
       if (this.registerForm.id == null || this.registerForm.departmentId == null || this.registerForm.doctorId == null ||
       this.registerForm.level == null || this.registerForm.recordNeeded == null || this.costAll == null ||
       this.patient.name == null || this.patient.gender == null || this.patient.birth == null || this.patient.age == null ||
-      this.patient.idNumber == null || this.patient.recordId == null) {
+      this.patient.id == null || this.patient.recordId == null) {
         this.$message("请将信息填写完整")
       } else {
         this.registerForm.patientId = this.patient.id
@@ -151,11 +149,9 @@ export default {
       axios.post("/register/init_depart"). then((res)=>{
         this.departments = res.data
       })
-      axios.post("/register/init_patientId"). then((res)=>{
-        this.patient.id = res.data
-      })
       this.doctors = []
 
+      this.registerForm.patientId = null
       this.registerForm.department = null
       this.registerForm.doctor = null
       this.registerForm.level = null
@@ -167,7 +163,7 @@ export default {
       this.patient.gender = null
       this.patient.birth = null
       this.patient.age = null
-      this.patient.idNumber = null
+      this.patient.id = null
       this.patient.addr = null
       this.patient.tel = null
     }
@@ -196,5 +192,10 @@ export default {
 span {
   color: gray;
   font-size: 14px;
+}
+#content{
+  position: relative;
+  top:0px;
+  bottom: 100px;
 }
 </style>
