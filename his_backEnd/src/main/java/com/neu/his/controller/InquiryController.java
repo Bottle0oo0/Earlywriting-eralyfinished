@@ -21,7 +21,6 @@ public class InquiryController {
     // 看诊业务
     @RequestMapping("/diagnose/init_undia")
     public List<RegPatientBean> getUndiagnosedList(@RequestBody Map<String, Integer> doctor) {
-        System.out.println(doctor.get("id"));
         return inquiry.getPatientList(doctor.get("id"), false);
     }
 
@@ -82,8 +81,8 @@ public class InquiryController {
     }
 
     @RequestMapping("/make_presc/patient_id")
-    public Patient getPatientId(@RequestBody Map<String, Integer> registerForm) {
-        return inquiry.getPatientIdNumber(registerForm.get("id"));
+    public PatientBean getPatientId(@RequestBody Map<String, Integer> registerForm) {
+        return new PatientBean(inquiry.getPatientIdNumber(registerForm.get("id")));
     }
 
     @RequestMapping("/make_presc")

@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div>
-      <el-input class="control-xl" v-model="patient.idNumber" placeholder="身份证号"></el-input>
-      <el-button type="primary" icon="el-icon-search" plain circle @click="searchAffairs(patient.idNumber)"></el-button><br>
+    <div class="head">
+      <el-input class="control-l" v-model="registerFormId" placeholder="病历号" style="margin-left: 30px; margin-top: 30px;"></el-input>
+      <el-button type="primary" icon="el-icon-search" plain circle style="margin-right: 80px" @click="searchAffairs(registerFormId)"></el-button>
+      <span>身份证号：</span>
+      <el-input class="control-xl" v-model="patient.idNumber" style="margin-right: 80px" readonly></el-input>
     </div>
     <div class="main">
       <span>姓名：</span>
@@ -39,6 +41,7 @@ export default {
   name: 'Refund',
   data() {
     return {
+      registerFormId: null,
       patient: {
         id: null,
         idNumber: null,
@@ -56,17 +59,19 @@ export default {
     }
   },
   methods: {
-    searchAffairs(patientId) {
-      axios.post("register/search_patient", {id: patientId}).then((res)=>{
+    searchAffairs (registerFormId) {
+      axios.post("/make_presc/patient_id", {id: registerFormId}).then((res) => {
         this.patient = res.data
-        console.log(this.patient)
-        axios.post("/fin/affair", {id: this.patient.id}).then((res)=>{
-          this.affairs = res.data
+        axios.post("/fin/affair", {id: this.patient.id}).then((res) => {
+          if (res.data) {
+            console.log(res)
+            this.affairs = res.data
+          } else {
+            this.$message("当前无该病历已支付信息")
+          }
         })
 
       })
-
-
     },
     checkSelectable(row) {
       if (row.paid == "未缴费" || row.state == "已出药") return false;

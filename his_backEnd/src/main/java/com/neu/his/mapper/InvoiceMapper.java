@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InvoiceMapper {
     @Select("select max(id) from invoice group by patient_id having patient_id=#{patientId}")
-    int getLastIdOf(@Param("patientId") int patientId);
+    Integer getLastIdOf(@Param("patientId") int patientId);
 
     @Select("select max(id)+1 from invoice")
     Integer newInvoiceId();

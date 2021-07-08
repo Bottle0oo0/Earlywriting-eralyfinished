@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div>
-      <el-input class="control-xl" v-model="patient.idNumber" placeholder="身份证号"></el-input>
-      <el-button type="primary" icon="el-icon-search" plain circle @click="searchDrugs(patient.idNumber)"></el-button><br>
+    <div class="head">
+      <el-input class="control-l" v-model="registerFormId" placeholder="病历号" style="margin-left: 30px; margin-top: 30px;"></el-input>
+      <el-button type="primary" icon="el-icon-search" plain circle style="margin-right: 80px" @click="searchDrugs(registerFormId)"></el-button>
+      <span>身份证号：</span>
+      <el-input class="control-xl" v-model="patient.idNumber" style="margin-right: 80px" readonly></el-input>
     </div>
     <div class="main">
       <span>姓名：</span>
@@ -36,6 +38,7 @@ export default {
   name: 'DrugRcv',
   data() {
     return {
+      registerFormId: null,
       patient: {
         id: null,
         idNumber : null,
@@ -52,8 +55,8 @@ export default {
     }
   },
   methods: {
-    searchDrugs(patientId) {
-      axios.post("register/search_patient", {id: patientId}).then((res)=>{
+    searchDrugs(registerFormId) {
+      axios.post("/make_presc/patient_id", {id: registerFormId}).then((res)=>{
         this.patient = res.data
         axios.post("/disp/affair", {id: this.patient.id}).then((res)=>{
           this.drugs = res.data

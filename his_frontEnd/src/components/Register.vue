@@ -2,8 +2,8 @@
   <div style="height: 100% ;margin:0px; padding: 0px">
     <div>
       <el-input class="control-xl" v-model="patient.idNumber" placeholder="身份证号" min="18" max="18"></el-input>
-      <el-button v-if="patient.idNumber==null || patient.idNumber.length==18" @click="searchPatientById(patient.idNumber)" icon="el-icon-search" circle></el-button>
-      <span v-if="patient.idNumber!=null && patient.idNumber.length!=18" style="font-size: 10px; color: red;">请输入正确格式</span>
+      <el-button v-if="patient.idNumber==null || patient.idNumber.length===18" @click="searchPatientById(patient.idNumber)" icon="el-icon-search" circle></el-button>
+      <span v-if="patient.idNumber!=null && patient.idNumber.length!==18" style="font-size: 10px; color: red;">请输入正确格式</span>
       <span style="position: absolute; right: 600px; top: 137px">病历号：</span>
       <el-input class="control-l" style="position: absolute; right: 390px" v-model="registerForm.id"></el-input>
       <span style="position: absolute; right: 260px; top: 137px">发票号：</span>
@@ -58,6 +58,7 @@
 
 <script>
 import axios from 'axios'
+
 export default {
   name: 'Register',
   data() {
@@ -106,7 +107,7 @@ export default {
         name: null,
         gender: null,
         birth: null,
-        age: null,
+        age:null,
         id: null,
         addr: null,
         idNumber : null,
@@ -170,6 +171,42 @@ export default {
       this.patient.idNumber = null
       this.patient.addr = null
       this.patient.tel = null
+    },
+    getAge(strBirthday) {
+      var returnAge,
+        strBirthdayArr = strBirthday.split("-"),
+        birthYear = strBirthdayArr[0],
+        birthMonth = strBirthdayArr[1],
+        birthDay = strBirthdayArr[2],
+        d = new Date(),
+        nowYear = d.getFullYear(),
+        nowMonth = d.getMonth() + 1,
+        nowDay = d.getDate();
+      if (nowYear == birthYear) {
+        returnAge = 0;//同年 则为0周岁
+      } else {
+        var ageDiff = nowYear - birthYear; //年之差
+        if (ageDiff > 0) {
+          if (nowMonth == birthMonth) {
+            var dayDiff = nowDay - birthDay;//日之差
+            if (dayDiff < 0) {
+              returnAge = ageDiff - 1;
+            } else {
+              returnAge = ageDiff;
+            }
+          } else {
+            var monthDiff = nowMonth - birthMonth;//月之差
+            if (monthDiff < 0) {
+              returnAge = ageDiff - 1;
+            } else {
+              returnAge = ageDiff;
+            }
+          }
+        } else {
+          returnAge = -1;//返回-1 表示出生日期输入错误 晚于今天
+        }
+      }
+      return returnAge;//返回周岁年龄
     }
   },
   computed: {

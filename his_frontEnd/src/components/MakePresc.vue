@@ -135,9 +135,6 @@ export default {
       axios.post("/make_presc/patient_id", {id: registerFormId}).then((res)=>{
         this.patient = res.data
       })
-      axios.post("/make_presc/patient_id", {id: registerFormId}).then((res)=>{
-        this.patintIndex = res.data
-      })
     },
     handleCurrentChangePresc(val) {
       this.prescItems = []

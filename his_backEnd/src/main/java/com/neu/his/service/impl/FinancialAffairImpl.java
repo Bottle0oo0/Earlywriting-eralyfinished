@@ -31,6 +31,7 @@ public class FinancialAffairImpl implements FinancialAffair {
 
     @Override
     public List<InvoiceEntryBean> getAffairs(int id) {
+        if(invoiceMapper.getLastIdOf(id) == null)return null;
         List<InvoiceEntry> entries = finAffairMapper.getInvoiceEntriesOf(invoiceMapper.getLastIdOf(id));
         List<InvoiceEntryBean> beans = new ArrayList<>();
         for (InvoiceEntry entry : entries) {
