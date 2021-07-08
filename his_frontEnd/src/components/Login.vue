@@ -1,11 +1,17 @@
-
 <template>
+<div >
+  <!-- \<span class="middle" :style="backgroundDiv" ></span> -->
 
-<div>
-<!-- <div class="middle" :style="backgroundDiv" > -->
 <!-- <div :style="{'background-image':'url('+img+')'}" > -->
+
+<transition name="fade"  v-on:after-leave="change_show">
+  <div v-show="show" class="middle" :style="backgroundDiv1" > </div>
+</transition>
+<transition name="fade" v-on:after-leave="change_show">
+  <div v-show="!show" class="middle" :style="backgroundDiv2" > </div>
+</transition>
   <!-- <div style="width: 100%; height: 100%; background-color: #5198d1; position: absolute; top: 0px; left: 0px;"> -->
-  <div class="middle" :style="backgroundDiv" >
+  <div style="width: 100%; height: 100%; background: rgba(81,152,209,0.6); position: absolute; top: 0px; left: 0px;">
     <div style="margin-top: 40px; text-align: center;">
       <span style="color: white; font-size: 35px; font-weight: bold;">医院信息管理系统</span><br>
       <span style="color: white; font-size: 28px;">Hospital Information System</span>
@@ -50,9 +56,8 @@
         <el-button  type="primary" @click="login()">登陆</el-button>
         <el-button type="primary" @click="goToSignUp()" plain>注册</el-button>
       </div>
-</div>
     </div>
-
+    </div>
 
   </div>
 </template>
@@ -61,14 +66,20 @@
 import axios from 'axios'
 export default {
   name: 'Login',
+  mounted:function(){
+    this.timer = setTimeout(()=>{   //设置延迟执行
+        this.change_show();//需要触发的函数
+    },3000);
+
+      },
   data() {
     return {
       id: null,
       psw: null,
       img:require('@/assets/cover3.jpg'),
-      backgroundDiv: {
-                  backgroundImage: 'url(' + require('@/assets/cover3.jpg') + ')'
-              }
+      show:true,
+      backgroundDiv1: {backgroundImage: 'url(' + require('@/assets/background.jpg') + ')'},
+      backgroundDiv2: {backgroundImage: 'url(' + require('@/assets/cover3.jpg') + ')'}
     }
 
   },
@@ -96,6 +107,9 @@ export default {
     clear() {
       this.id = null,
       this.psw = null
+    },
+    change_show(){
+      this.show =!this.show
     }
   },
 }
@@ -105,7 +119,15 @@ export default {
 .middle {
     height: 100%;
     width: 100%;
-    background: no-repeat center top;
-    background-size: contain;
+    position:fixed;
+    background-size:100% 100%;
+/*    background: no-repeat center top; */
+/*    background-size: 100% 100%; */
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 4s
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0
 }
 </style>
