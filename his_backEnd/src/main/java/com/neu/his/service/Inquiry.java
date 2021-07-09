@@ -34,6 +34,8 @@ public interface Inquiry {
 
     int getPatientId(int registerFormId);
 
+    Patient getPatientIdNumber(int registerFormId);
+
     void makePresc(PrescriptionBean bean);
 
     void addPrescription(Prescription prescription);

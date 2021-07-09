@@ -31,15 +31,18 @@ public class RegisterController {
     public int newRecordId() {
         return register.newRecordId();
     }
-
+    @RequestMapping("/register/init_patientId")
+    public int newPatientId() {
+        return register.newPatientId();
+    }
     @RequestMapping("/register/init_depart")
     public List<Department> getDepartments() {
         return register.getDepartments();
     }
 
     @RequestMapping("/register/search_patient")
-    public Patient getPatientForReg(@RequestBody Map<String, Integer> patient) {
-        return register.getPatientForReg(patient.get("id"));
+    public Patient getPatientForReg(@RequestBody Map<String, String> patient) {
+        return register.searchPatient(patient.get("id"));
     }
 
     @RequestMapping("/register/doc_depart")

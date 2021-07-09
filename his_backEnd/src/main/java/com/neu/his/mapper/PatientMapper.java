@@ -12,12 +12,18 @@ public interface PatientMapper {
     @Select("select * from patient where id=#{id}")
     Patient getPatient(@Param("id") int id);
 
-    @Insert("insert into patient values (#{id}, #{name}, #{gender}, #{birth}, #{age}, #{addr}, #{tel}, #{recordId})")
+    @Select("select * from patient where idNumber=#{idNumber}")
+    Patient searchPatient(@Param("idNumber") String idNumber);
+
+    @Insert("insert into patient values (null, #{idNumber}, #{name}, #{gender}, #{birth}, #{age}, #{addr}, #{tel}, #{recordId})")
     void addPatient(Patient patient);
 
-    @Update("update patient set name=#{name}, age=#{age}, addr=#{addr}, tel=#{tel} where id=#{id}")
+    @Update("update patient set name=#{name}, idNumber = {idNumber},age=#{age}, addr=#{addr}, tel=#{tel} where id=#{id}")
     void updatePatient(Patient patient);
 
     @Select("select max(record_id)+1 from patient")
     Integer newRecordId();
+
+    @Select("select max(id)+1 from patient")
+    Integer newPatientId();
 }

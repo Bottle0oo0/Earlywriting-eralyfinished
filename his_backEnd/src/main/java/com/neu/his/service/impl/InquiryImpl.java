@@ -36,8 +36,10 @@ public class InquiryImpl implements Inquiry {
     @Override
     public List<RegPatientBean> getPatientList(int doctorId, boolean diagnosed) {
         List<RegisterForm> registerFormList = registerMapper.getRegisterFormOf(doctorId, diagnosed);
+
         List<RegPatientBean> beanList = new ArrayList<>();
         for (RegisterForm registerForm : registerFormList) {
+            System.out.println(registerForm.getPatientId());
             Patient patient = patientMapper.getPatient(registerForm.getPatientId());
             beanList.add(new RegPatientBean(registerForm.getId(), patient.getName()));
         }
@@ -103,6 +105,11 @@ public class InquiryImpl implements Inquiry {
     @Override
     public int getPatientId(int registerFormId) {
         return registerMapper.getRegisterForm(registerFormId).getPatientId();
+    }
+    @Override
+    public Patient getPatientIdNumber(int registerFormId) {
+        int id = registerMapper.getRegisterForm(registerFormId).getPatientId();
+        return patientMapper.getPatient(id);
     }
 
     @Override

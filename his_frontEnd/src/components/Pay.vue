@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div>
-      <el-input class="control-xl" v-model="patient.id" placeholder="身份证号"></el-input>
-      <el-button type="primary" icon="el-icon-search" plain circle @click="searchAffairs(patient.id)"></el-button><br>
+    <div class="head">
+      <el-input class="control-l" v-model="registerFormId" placeholder="病历号" style="margin-left: 30px; margin-top: 30px;"></el-input>
+      <el-button type="primary" icon="el-icon-search" plain circle style="margin-right: 80px" @click="searchAffairs(registerFormId)"></el-button>
+      <span>身份证号：</span>
+      <el-input class="control-xl" v-model="patient.idNumber" style="margin-right: 80px" readonly></el-input>
     </div>
     <div class="main">
       <span>姓名：</span>
@@ -15,7 +17,6 @@
     <div>
       <el-table :data="affairs" height="350px" style="margin-left: 30px; margin-right: 30px; width: 90%;" @selection-change="handleSelection">
         <el-table-column type="selection" :selectable="checkSelectable"></el-table-column>
-        <el-table-column type="index"></el-table-column>
         <el-table-column label="缴费项目ID" prop="affairId"></el-table-column>
         <el-table-column label="缴费项目名" prop="affairName"></el-table-column>
         <el-table-column label="数量" prop="num"></el-table-column>
@@ -39,8 +40,10 @@ export default {
   name: 'Pay',
   data() {
     return {
+      registerFormId: null,
       patient: {
         id: null,
+        idNumber: null,
         name: null,
         gender: null,
         birth: null,
@@ -55,16 +58,22 @@ export default {
     }
   },
   methods: {
-    searchAffairs(patientId) {
-      axios.post("/fin/get_patient", {id: patientId}).then((res)=>{
+    searchAffairs (registerFormId) {
+      axios.post("/make_presc/patient_id", {id: registerFormId}).then((res) => {
         this.patient = res.data
+        axios.post("/fin/affair", {id: this.patient.id}).then((res) => {
+          if (res) {
+            this.affairs = res.data
+          } else {
+            this.$message("当前无该病历付费信息")
+          }
+        })
+
       })
-      axios.post("/fin/affair", {id: patientId}).then((res)=>{
-        this.affairs = res.data
-      })
+
     },
     checkSelectable(row) {
-      if (row.paid == "已缴费") return false;
+      if (row.paid === "已缴费") return false;
       else return true;
     },
     handleSelection(val) {

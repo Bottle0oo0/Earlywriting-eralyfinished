@@ -2,15 +2,15 @@
   <div>
     <div class="table-pane-1">
       <span class="table-title">待诊患者</span><br>
-      <el-table :data="undiagnosedList" height="300px" highlight-current-row @current-change="handleCurrentChangePatient">
-        <el-table-column label="发票号" prop="id"></el-table-column>
+      <el-table :data="undiagnosedList" height="200px" highlight-current-row @current-change="handleCurrentChangePatient">
+        <el-table-column label="病历号" prop="id"></el-table-column>
         <el-table-column label="患者姓名" prop="name"></el-table-column>
       </el-table>
     </div>
     <div class="table-pane-2">
       <span class="table-title">已诊患者</span><br>
-      <el-table :data="diagnosedList" height="300px" highlight-current-row @current-change="handleCurrentChangePatient">
-        <el-table-column label="发票号" prop="id"></el-table-column>
+      <el-table :data="diagnosedList" height="200px" highlight-current-row @current-change="handleCurrentChangePatient">
+        <el-table-column label="病历号" prop="id"></el-table-column>
         <el-table-column label="患者姓名" prop="name"></el-table-column>
       </el-table>
     </div>
@@ -47,7 +47,7 @@
             <el-table-column label="疾病编码" prop="code"></el-table-column>
             <el-table-column label="疾病名" prop="name"></el-table-column>
           </el-table>
-        </div>     
+        </div>
         <div class="add-disease-pane">
           <el-input v-model="diseaseCode" placeholder="疾病编码" style="width: 180px"></el-input>
           <el-button type="primary" icon="el-icon-search" plain circle style="margin-right: 50px" @click="searchDisease(diseaseCode)">
@@ -137,7 +137,7 @@ export default {
     uploadRecord() {
       if (this.updated) {
         axios.post("/diagnose/insert", this.record)
-        axios.post("/diagnose", {id: this.registerFormId})
+        axios.post("/diagnose", {id: this.registerFormId}).then(this.init)
         this.$message("已提交病历")
       } else if (this.patient.id == null) {
         this.$message("请将信息填写完整")
@@ -145,6 +145,7 @@ export default {
         axios.post("/diagnose/update", this.record)
         axios.post("/diagnose", {id: this.registerFormId})
         this.$message("已提交病历")
+        this.init()
       }
     },
     newPage() {

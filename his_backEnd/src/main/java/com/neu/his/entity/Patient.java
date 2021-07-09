@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Patient {
     private int id;
+    private String idNumber; //身份证号
     private String name;
     private int gender;
     private String birth; // YYYY-mm-dd
@@ -12,7 +13,7 @@ public class Patient {
     private int tel;
     private int recordId;
 
-    public Patient(int id, String name, int gender, String birth, int age, String addr, int tel, int recordId) {
+    public Patient(int id, String idNumber,String name, int gender, String birth, int age, String addr, int tel, int recordId) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -21,6 +22,7 @@ public class Patient {
         this.addr = addr;
         this.tel = tel;
         this.recordId = recordId;
+        this.idNumber = idNumber;
     }
 
     public int getId() {
@@ -85,5 +87,13 @@ public class Patient {
 
     public void setRecordId(int recordId) {
         this.recordId = recordId;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 }

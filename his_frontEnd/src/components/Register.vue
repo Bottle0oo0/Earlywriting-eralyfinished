@@ -1,12 +1,12 @@
 <template>
   <div style="height: 100% ;margin:0px; padding: 0px">
     <div>
-      <el-input class="control-xl" v-model="patient.id" placeholder="身份证号" min="18" max="18"></el-input>
-      <el-button v-if="patient.id==null || patient.id.length==18" @click="searchPatientById(patient.id)" icon="el-icon-search" circle></el-button>
-      <span v-if="patient.id!=null && patient.id.length!=18" style="font-size: 10px; color: red;">请输入正确格式</span>
-      <span style="position: absolute; right: 600px; top: 137px">发票号：</span>
+      <el-input class="control-xl" v-model="patient.idNumber" placeholder="身份证号" min="18" max="18"></el-input>
+      <el-button v-if="patient.idNumber==null || patient.idNumber.length===18" @click="searchPatientById(patient.idNumber)" icon="el-icon-search" circle></el-button>
+      <span v-if="patient.idNumber!=null && patient.idNumber.length!==18" style="font-size: 10px; color: red;">请输入正确格式</span>
+      <span style="position: absolute; right: 600px; top: 137px">病历号：</span>
       <el-input class="control-l" style="position: absolute; right: 390px" v-model="registerForm.id"></el-input>
-      <span style="position: absolute; right: 260px; top: 137px">病历号：</span>
+      <span style="position: absolute; right: 260px; top: 137px">发票号：</span>
       <el-input class="control-l" style="position: absolute; right: 50px" v-model="patient.recordId"></el-input><br>
     </div>
     <h3 style="color: gray;">挂号信息</h3><br>
@@ -24,7 +24,7 @@
       <el-input class="control" v-model="patient.age"></el-input><br>
       <!-- 第二行 -->
       <span>身份证号：</span>
-      <el-input class="control-xl" v-model="patient.id"></el-input>
+      <el-input class="control-xl" v-model="patient.idNumber"></el-input>
       <span>家庭住址（可选）：</span>
       <el-input class="control-xl" style="width: 582px" v-model="patient.addr"></el-input><br>
       <!-- 第三行 -->
@@ -58,6 +58,7 @@
 
 <script>
 import axios from 'axios'
+
 export default {
   name: 'Register',
   data() {
@@ -106,9 +107,10 @@ export default {
         name: null,
         gender: null,
         birth: null,
-        age: null,
+        age:null,
         id: null,
         addr: null,
+        idNumber : null,
         tel: null,
         recordId: null
       }
@@ -129,7 +131,7 @@ export default {
       if (this.registerForm.id == null || this.registerForm.departmentId == null || this.registerForm.doctorId == null ||
       this.registerForm.level == null || this.registerForm.recordNeeded == null || this.costAll == null ||
       this.patient.name == null || this.patient.gender == null || this.patient.birth == null || this.patient.age == null ||
-      this.patient.id == null || this.patient.recordId == null) {
+      this.patient.idNumber == null || this.patient.recordId == null) {
         this.$message("请将信息填写完整")
       } else {
         this.registerForm.patientId = this.patient.id
@@ -149,9 +151,12 @@ export default {
       axios.post("/register/init_depart"). then((res)=>{
         this.departments = res.data
       })
+      axios.post("/register/init_patientId"). then((res)=>{
+        this.patient.id = res.data
+      })
       this.doctors = []
 
-      this.registerForm.patientId = null
+      this.registerForm.patientid = null
       this.registerForm.department = null
       this.registerForm.doctor = null
       this.registerForm.level = null
@@ -163,9 +168,45 @@ export default {
       this.patient.gender = null
       this.patient.birth = null
       this.patient.age = null
-      this.patient.id = null
+      this.patient.idNumber = null
       this.patient.addr = null
       this.patient.tel = null
+    },
+    getAge(strBirthday) {
+      var returnAge,
+        strBirthdayArr = strBirthday.split("-"),
+        birthYear = strBirthdayArr[0],
+        birthMonth = strBirthdayArr[1],
+        birthDay = strBirthdayArr[2],
+        d = new Date(),
+        nowYear = d.getFullYear(),
+        nowMonth = d.getMonth() + 1,
+        nowDay = d.getDate();
+      if (nowYear == birthYear) {
+        returnAge = 0;//同年 则为0周岁
+      } else {
+        var ageDiff = nowYear - birthYear; //年之差
+        if (ageDiff > 0) {
+          if (nowMonth == birthMonth) {
+            var dayDiff = nowDay - birthDay;//日之差
+            if (dayDiff < 0) {
+              returnAge = ageDiff - 1;
+            } else {
+              returnAge = ageDiff;
+            }
+          } else {
+            var monthDiff = nowMonth - birthMonth;//月之差
+            if (monthDiff < 0) {
+              returnAge = ageDiff - 1;
+            } else {
+              returnAge = ageDiff;
+            }
+          }
+        } else {
+          returnAge = -1;//返回-1 表示出生日期输入错误 晚于今天
+        }
+      }
+      return returnAge;//返回周岁年龄
     }
   },
   computed: {

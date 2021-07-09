@@ -3,6 +3,7 @@ package com.neu.his.controller;
 import com.neu.his.bean.FinAffairBean;
 import com.neu.his.bean.InvoiceEntryBean;
 import com.neu.his.bean.PatientBean;
+import com.neu.his.entity.Patient;
 import com.neu.his.service.FinancialAffair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +19,7 @@ public class FinAffairController {
     private FinancialAffair financialAffair;
 
     @RequestMapping("/fin/get_patient")
-    public PatientBean getPatient(@RequestBody Map<String, Integer> patient) {
+    public Patient getPatient(@RequestBody Map<String, Integer> patient) {
         return financialAffair.getPatient(patient.get("id"));
     }
 

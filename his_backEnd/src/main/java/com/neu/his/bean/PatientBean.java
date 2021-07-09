@@ -4,6 +4,7 @@ import com.neu.his.entity.Patient;
 
 public class PatientBean {
     private int id;
+    private String idNumber; //身份证号
     private String name;
     private String gender;
     private String birth;
@@ -21,6 +22,7 @@ public class PatientBean {
         this.addr = patient.getAddr();
         this.tel = patient.getTel();
         this.recordId = patient.getRecordId();
+        this.idNumber = patient.getIdNumber();
     }
 
     public int getId() {
@@ -85,5 +87,13 @@ public class PatientBean {
 
     public void setRecordId(int recordId) {
         this.recordId = recordId;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <el-input class="control-l" v-model="registerForm.id" placeholder="发票号"></el-input>
+      <el-input class="control-l" v-model="registerForm.id" placeholder="病历号"></el-input>
       <el-button @click="searchRegisterFormById(registerForm.id)" icon="el-icon-search" circle></el-button>
     </div>
     <h3 style="color: gray;">挂号信息</h3><br>
