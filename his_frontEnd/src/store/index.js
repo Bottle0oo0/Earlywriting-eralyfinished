@@ -19,6 +19,9 @@ export default new Vuex.Store({
 
   },
   modules: {
-    
+
   }
+  	// state:{
+  	// 	userId : '12312'
+  	// }
 })

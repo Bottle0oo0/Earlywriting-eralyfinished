@@ -106,7 +106,7 @@ export default {
         },
         {
           label: "药剂师",
-          value: 3
+          value: 3,
         },
         {
           label: "财务师",
